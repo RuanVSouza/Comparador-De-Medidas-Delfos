@@ -2,8 +2,9 @@
 Cypress.Commands.add('GetTemperatura', () => {
   cy.get('.w-now > big').then(($temp) => {
     //Criando numero randomico
-    var tempParamMax = 26
-    var tempParamMin = 20
+    //EDIT: modificado parametros dos numeros randomicos por que estavam retornando um valor sempre abaixo do valor informado pelo Windy, não sendo possivel ver todos os casos.
+    var tempParamMax = 23//modificado
+    var tempParamMin = 13//modificado
     let parametro = Math.floor(Math.random() * (tempParamMax - tempParamMin) + tempParamMax)
     // Obter o conteúdo textual do elemento
     const temperaturaString = $temp.text();
@@ -20,9 +21,10 @@ Cypress.Commands.add('GetTemperatura', () => {
 Cypress.Commands.add('GetEnergiaKT',() => {
   cy.get('.ws-wind').then(($energia) => {
     //Criando numero randomico
-    var tempParamMax = 5
-    var tempParamMin = 3
-    let parametro = Math.floor(Math.random() * (tempParamMax - tempParamMin) + tempParamMax)
+    //EDIT: modificado parametros dos numeros randomicos por que estavam retornando um valor sempre abaixo do valor informado pelo Windy, não sendo possivel ver todos os casos.
+    var enerParamMax = 7 //modificado 
+    var enerParamMin = 1 //modificado
+    let parametro = Math.floor(Math.random() * (enerParamMax - enerParamMin) + enerParamMax)
     const energiaString = $energia.text();
     const retirandoCaracteres = energiaString.replace(/"/, '').replace(/kt/g, "")
     const energiaNumero = parseFloat(retirandoCaracteres)
@@ -43,6 +45,6 @@ Cypress.Commands.add('verificarMaior', (x, y, z) => {
   }else if( x < y){
     cy.log("Caso 2 (" + z + " randomica maior): "+ z + " Parametro: " + y + " ||||" + z + " Windy era: " + x);
   } else{
-    cy.log("As "+ z + "s são iguais.,"+ z + " do Windy: " + x + " |||| "+ z + " do parametro: " + y);
+    cy.log("As "+ z + "s são iguais."+ z + " do Windy: " + x + " |||| "+ z + " do parametro: " + y);
   }
 })
